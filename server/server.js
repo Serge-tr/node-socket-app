@@ -16,15 +16,15 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('New user connected');
 
-  socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat!'));
-
-  socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
-
   socket.on('join', (params, callback) => {
     if (isJuveString(params.name) || !isJuveString(params.room)) {
       callback('Its ok!')
     }
 
+    socket.join(params.room);
+
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat!'));
+    socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined`));
     callback();
   });
 
