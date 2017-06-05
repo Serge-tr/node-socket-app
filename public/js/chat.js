@@ -30,6 +30,16 @@ socket.on('disconnect', function () {
   console.log('Disconnected from server');
 });
 
+socket.on('updateUserList', function (users) {
+  var ol = $('<ol></ol>');
+
+  users.forEach(function (user) {
+    ol.append($('<li></li>').text(user));
+  });
+
+  $('#users').html(ol);
+});
+
 // New text message
 socket.on('newMessage', function (message) {
   var formattedTime = moment(message.createdAt).format('H:mm');
@@ -58,12 +68,12 @@ socket.on('newLocationMessage', function (message) {
   scrollToBottom();
 });
 
-socket.emit('createMessage', {
-  from: 'Frank',
-  text: 'Fuck you!'
-}, function (data) {
-  console.log(data);
-});
+// socket.emit('createMessage', {
+//   from: 'Frank',
+//   text: 'Fuck you!'
+// }, function (data) {
+//   console.log(data);
+// });
 
 $('#message-form').on('submit', function (e) {
   e.preventDefault();

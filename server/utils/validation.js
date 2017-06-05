@@ -1,5 +1,5 @@
-var isJuveString = (str) => {
+var isRealString = (str) => {
   return typeof str === 'string' && str.trim().length > 0;
 };
 
-module.exports = {isJuveString};
+module.exports = {isRealString};
