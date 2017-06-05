@@ -68,12 +68,12 @@ socket.on('newLocationMessage', function (message) {
   scrollToBottom();
 });
 
-// socket.emit('createMessage', {
-//   from: 'Frank',
-//   text: 'Fuck you!'
-// }, function (data) {
-//   console.log(data);
-// });
+socket.emit('createMessage', {
+  from: 'Frank',
+  text: 'Fuck you!'
+}, function (data) {
+  console.log(data);
+});
 
 $('#message-form').on('submit', function (e) {
   e.preventDefault();
